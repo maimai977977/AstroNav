@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ]   # 如果你用的是 master 分支，改成 master
+    branches: [ main ]   # 如果你用的是 master，改成 master
   workflow_dispatch:
 
 permissions:
@@ -16,12 +16,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        uses: withastro/action@v3
-        # 如果你需要指定 Node 版本或包管理器，取消注释：
-        # with:
-        #   node-version: 20
-        #   package-manager: pnpm@latest
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: npm ci
+      - name: Build
+        run: npm run build
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
 
   deploy:
     needs: build
