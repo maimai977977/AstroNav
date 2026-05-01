@@ -40,6 +40,16 @@ const categories = ['全部', ...new Set(navData.map(item => item.category).filt
           </div>
                     <!-- 美化搜索框 + QQ头像（圆形旋转） -->
 <div class="flex items-center gap-3">
+      <!-- 夸克网盘资源入口按钮 -->
+  <a 
+  href="/AstroNav/table" 
+  class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+  title="夸克网盘资源库"
+>
+  <svg class="w-5 h-5 text-gray-600 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2 1.5 4 4 4h8c2.5 0 4-2 4-4V7M4 7h16M4 7l4-4h8l4 4" />
+  </svg>
+</a>
     <!-- 文件夹视图入口按钮 -->
   <a 
     href="/AstroNav/folder" 
