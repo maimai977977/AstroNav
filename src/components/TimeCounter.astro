@@ -1,0 +1,81 @@
+---
+// 网站启动日期（请修改为你网站的实际上线日期）
+const startDate = '2026-05-01 00:00:00';
+---
+
+<div id="timeCounter" class="text-center">
+  <div class="inline-flex flex-col items-center">
+    <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">
+      <span class="text-red-500 mr-1">❤️</span> 网站已稳定运行
+    </div>
+    <div class="flex flex-wrap justify-center gap-3 text-sm font-mono">
+      <div class="flex items-center gap-1">
+        <span class="text-gray-600 dark:text-gray-400">📅</span>
+        <span id="days" class="text-cyan-600 dark:text-cyan-400 font-semibold">0</span>
+        <span class="text-gray-500 dark:text-gray-400">天</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <span>⏰</span>
+        <span id="hours" class="text-cyan-600 dark:text-cyan-400 font-semibold">00</span>
+        <span class="text-gray-500 dark:text-gray-400">时</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <span>⏱️</span>
+        <span id="minutes" class="text-cyan-600 dark:text-cyan-400 font-semibold">00</span>
+        <span class="text-gray-500 dark:text-gray-400">分</span>
+      </div>
+      <div class="flex items-center gap-1">
+        <span>⚡</span>
+        <span id="seconds" class="text-cyan-600 dark:text-cyan-400 font-semibold">00</span>
+        <span class="text-gray-500 dark:text-gray-400">秒</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // 确保在浏览器环境运行
+    if (typeof window === 'undefined') return;
+    
+    const startDate = new Date('2026-05-01 00:00:00');
+    
+    // 验证日期有效性
+    if (isNaN(startDate.getTime())) {
+      console.error('无效的启动日期');
+      return;
+    }
+    
+    function updateCounter() {
+      const now = new Date();
+      const diff = now.getTime() - startDate.getTime();
+      const totalSeconds = Math.max(0, Math.floor(diff / 1000));
+      
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+      
+      const daysEl = document.getElementById('days');
+      const hoursEl = document.getElementById('hours');
+      const minutesEl = document.getElementById('minutes');
+      const secondsEl = document.getElementById('seconds');
+      
+      if (daysEl) daysEl.textContent = days.toString();
+      if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+      if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+      if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+    }
+    
+    // 等待 DOM 加载完成
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateCounter);
+      document.addEventListener('DOMContentLoaded', () => {
+        setInterval(updateCounter, 1000);
+      });
+    } else {
+      updateCounter();
+      setInterval(updateCounter, 1000);
+    }
+  })();
+</script>

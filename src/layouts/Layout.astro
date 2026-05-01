@@ -3,6 +3,7 @@
 import '../styles/global.css'
 import NavCard from '../components/NavCard.astro';
 import navData from '../data/Navdata.json';   
+import TimeCounter from '../components/TimeCounter.astro';
 
 export interface Props {
   title?: string;
@@ -138,6 +139,7 @@ const categories = ['全部', ...new Set(navData.map(item => item.category).filt
       </div>
 
 <footer class="relative mt-12 overflow-hidden bg-gradient-to-r from-gray-900 via-indigo-900 to-purple-900 dark:from-gray-950 dark:via-indigo-950 dark:to-purple-950 border-t border-white/10 shadow-inner">
+
   <!-- 动态流光线条 -->
   <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full animate-[shimmer_3s_infinite]"></div>
   
@@ -150,7 +152,8 @@ const categories = ['全部', ...new Set(navData.map(item => item.category).filt
         </span>
         <span class="text-xs text-cyan-400/70 animate-pulse">✨</span>
       </div>
-      
+      <!-- 网站启动日期 -->
+      <TimeCounter client:load / />
       <!-- 社交图标（紧凑） -->
       <div class="flex gap-3">
         <a href="#" class="group w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-cyan-500 transition-all duration-300 hover:scale-110">
@@ -298,6 +301,7 @@ if (qqAvatar) {
         quoteEl.textContent = '✨ 长风破浪会有时，直挂云帆济沧海。';
       });
   }
+  
 </script>
 <!-- 动画（只需保留 shimmer） -->
 <style>
